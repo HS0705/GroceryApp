@@ -7,7 +7,7 @@ export default class Navbar extends Component{
 
     render() {
         return(
-            <nav className="navbar navbar-exapnd-sm bg-primary navbar-dark px-sm-5">
+            <NavStyle className="navbar navbar-exapnd-sm  navbar-dark px-sm-5">
                 <Link to='/'>
                     <img src={logo} alt="store" className="navbar-brand" width="50" height="50"  />
                 </Link>
@@ -26,8 +26,17 @@ export default class Navbar extends Component{
                             my cart
                         </ButtonContainer>
                     </Link>                
-            </nav>
+            </NavStyle>
         );
     }
 }
 
+const NavStyle = styled.nav`
+background: var(--mainBlue);
+.nav-link{
+    color:var(--mainWhite) !important;
+    font-size:1.3rem;
+    text-transfrom:capitalize;
+
+}
+`
