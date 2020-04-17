@@ -8,7 +8,7 @@ import ProductList from './components/ProductList';
 import Product from './components/Product';
 import Cart from './components/Cart';
 import Default from './components/Default';
-import Detail from './components/details';
+import Detail from './components/Detail';
 
 class App extends Component {
   render() {
@@ -18,7 +18,7 @@ class App extends Component {
       <Switch>
         <Route exact path="/" component={ProductList} />
         <Route path="/product" component={Product} />
-        <Route path="/details" component={Detail} />
+        <Route path="/detail" component={Detail} />
         <Route path="/cart" component={Cart} />
         <Route  component={Default} />
       </Switch>

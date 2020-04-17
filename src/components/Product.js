@@ -1,30 +1,28 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import styled  from 'styled-components';
-import  {Link} from 'react-router-dom';
-import {ProductConsumer} from '../context';
+import  { Link } from 'react-router-dom';
+import { ProductConsumer } from '../context';
 import  PropTypes from 'prop-types';
 
 export default class Product extends Component{
 
     render() {
-        const {id,title,img,price,inCart} = this.props.product;
+        const {id,title,img,subCategories} = this.props.product; 
         return(
             <ProductWrapper className='col-9 mx-auto col-md-6 col-lg-3 my-3'>
                 <div className="card">
-                    <div className="img-container p-4" onClick={()=>{console.log("Click Image")}}>
-                        <Link to="/details">
-                            <img src={img} alt="product" className="card-img-top"></img>
-                        </Link>
-                        <button className="cart-btn" disabled={inCart?true: false} onClick={()=>{console.log('Added to the cart')}} >
-                        {inCart?(<p className="text-capitalize mb-0" disabled>
-                            {" "}
-                            in cart
-                        </p>) :(
-                            <i className="fas fa-cart-plus" />
+                    <ProductConsumer>
+                        {value =>(
+                            <div className="img-container p-4" onClick={() => 
+                                value.handleSubCategory(id)
+                            }>
+                            <Link to="/detail">
+                                <img src={img} alt="product" className="card-img-top"></img>
+                            </Link>
+                        </div>
                         )
-                        }
-                        </button>
-                    </div>
+                        }                    
+                    </ProductConsumer>
                     <div className="card-footer text-muted">
                        <p>{title}</p>
                     </div>
@@ -37,12 +35,9 @@ export default class Product extends Component{
 
 Product.propTypes = {
     product:PropTypes.shape({
-        id:PropTypes.number,
+        id:PropTypes.string,
         img:PropTypes.string,
         title:PropTypes.string,
-        price:PropTypes.number,
-        inCart:PropTypes.bool
-
     }).isRequired
 };
 const ProductWrapper= styled.div`
