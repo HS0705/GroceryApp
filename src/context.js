@@ -6,7 +6,8 @@ const ProductContext=React.createContext();
 class ProductProvider extends Component{
     state={
         products:[],
-        subProducts: []
+        subProducts: [],
+        cart: []
     };
     componentDidMount(){
         this.setProducts();
@@ -52,11 +53,11 @@ class ProductProvider extends Component{
         const product =tempList[index]
         product.inCart= true;
         product.count += 1;
-        console.log(product.count);
+        // console.log(product.count);
         const price=product.price;
         product.total=  price * product.count;
     this.setState(()=>{
-        return {subProducts:tempList, cart: [this.state.cart, product]};
+        return { subProducts:tempList, cart: [...this.state.cart, product] };
     });
 }
     render() {
