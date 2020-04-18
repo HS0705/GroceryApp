@@ -115,15 +115,15 @@ removeItem = (subid)=> {
 clearCart = () => {
     let tempSubProducts =[...this.state.subProducts];
     tempSubProducts.forEach(item => {
-        const index = tempSubroducts.indexOf(this.getSubCategory(item.subid));
-        let clearedProduct = tempProducts[index];
+        const index = tempSubProducts.indexOf(this.getSubCategory(item.subid));
+        let clearedProduct = tempSubProducts[index];
         clearedProduct.inCart = false ;
         clearedProduct.count = 0;
         clearedProduct.total = 0 ;
     });
     this.setState(
         () => {
-        return { cart:[],subProducts: tempProducts};
+        return { cart:[],subProducts: tempSubProducts};
     }, () => {
         this.addTotals();
     }
