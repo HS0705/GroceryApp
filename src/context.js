@@ -12,8 +12,7 @@ class ProductProvider extends Component{
         modalProduct: [],
         cartSubTotal:0,
         tax:0,
-        cartTotal:0
-
+        cartTotal:0,
     };
     componentDidMount(){
         this.setProducts();
@@ -69,7 +68,7 @@ class ProductProvider extends Component{
         const price=product.price;
         product.total=  price;
     this.setState(()=>{
-        return { subProducts:tempList, cart: [...this.state.cart, product] };
+        return { subProducts: tempList, cart: [...this.state.cart, product] };
     }, ()=> {
         this.addTotals();
     });
@@ -85,7 +84,7 @@ openModal = subid =>{
 ////Close the modal
 closeModal = () => {
     this.setState(()=>{
-        return{modalOpen:false}
+        return{ modalOpen:false }
     })
 }
 //
@@ -98,11 +97,37 @@ decreaseQuantity = (subid) =>{
 }
 
 removeItem = (subid)=> {
-    console.log("Remove the Item");
+    let tempProducts =[...this.state.subProducts];
+    let tempCart = [...this.state.cart];
+    tempCart =tempCart.filter(item => item.subid !== subid);
+    const index =tempProducts.indexOf(this.getSubCategory(subid));
+    let removedProduct = tempProducts[index];
+    removedProduct.inCart = false ;
+    removedProduct.count = 0;
+    removedProduct.total = 0 ;
+    this.setState(()=>{
+        return{ cart: [...tempCart], subProducts: [...tempProducts]}
+    },()=>{
+        this.addTotals();
+    })
 }
 
-clearCart =() =>{
-    console.log("Empty cart");
+clearCart = () => {
+    let tempSubProducts =[...this.state.subProducts];
+    tempSubProducts.forEach(item => {
+        const index = tempSubroducts.indexOf(this.getSubCategory(item.subid));
+        let clearedProduct = tempProducts[index];
+        clearedProduct.inCart = false ;
+        clearedProduct.count = 0;
+        clearedProduct.total = 0 ;
+    });
+    this.setState(
+        () => {
+        return { cart:[],subProducts: tempProducts};
+    }, () => {
+        this.addTotals();
+    }
+    );
 }
 addTotals =()=>{
     let subTotal = 0;
@@ -115,7 +140,6 @@ addTotals =()=>{
     this.setState(()=>{
         return { cartSubTotal:subTotal, tax:tax, cartTotal:total }
     })
-
 }
     render() {
         return(

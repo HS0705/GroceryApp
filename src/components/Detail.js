@@ -25,16 +25,20 @@ export default class Detail extends Component{
                                             <div className="card-columns p-5" >
                                             <div className="card">
                                                 <div className="img-container p-3">
-                                                    <img src={i.image} alt="product" className="card-img-top"></img>
-                                                </div>         
-                                                <ButtonContainer cart
-                                                    disabled={i.inCart ? true : false}
-                                                    onClick= {()=>{
-                                                        value.addToCart(i.subid);
-                                                        value.openModal(i.subid);
-                                                    }}>
-                                                        AddToCart
-                                                </ButtonContainer>         
+                                                    <img src={i.image} alt="product" className="card-img-top" />         
+                                                    <button className="cart-btn"
+                                                        disabled={i.inCart ? true : false}
+                                                        onClick= {()=>{
+                                                            value.addToCart(i.subid);
+                                                            value.openModal(i.subid);
+                                                        }}>
+                                                            {i.inCart ? (<p className="text-capitalize mb-0 disabled">
+                                                                {" "} InCart
+                                                                </p>):(
+                                                                    <i className="fas fa-cart-plus" />
+                                                                    )}
+                                                    </button> 
+                                                    </div>        
                                                 <div className="card-footer p-4 d-flex justify-content-between">
                                                     <p className="text-capitalize font-weight-bold ">{i.info}</p>
                                                     <span className="text-capitalize font-weight-bold mr-1">${i.price}</span>
@@ -92,11 +96,11 @@ Detail.propTypes = {
 .img-container:hover .card-img-top{
     transform:scale(1.2);
 }
-.cart-btn{
+.cart-btn {
     position:absolute;
     bottom:0;
     right:0;
-    padding:0.3rems 0.3rems;
+    padding:0.3rems 0.3rems 0 0;
     border:none;
     color:blue ;
     font-size:1.4rem;
@@ -106,5 +110,9 @@ Detail.propTypes = {
 }
 .img-container:hover .cart-btn{
     transform: translate(0,0);
+}
+.cart-btn:hover {
+    color:blue;
+    curosr:pointer;
 }
 `;
