@@ -3,6 +3,10 @@ import styled from 'styled-components';
 export const ButtonContainer = styled.button`
 text-transform:capitalize;
 font-size:1.4rem;
+&:cart{
+    background:Beige;
+    color:Black;
+}
 background:transparent;
 border:0.1rem solid Black;
 color:var(--lightBlue);

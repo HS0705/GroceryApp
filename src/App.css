@@ -24,3 +24,23 @@ body{
 .text-bright{
   color:var(--lightyellow);
 }
+
+.btn-black{
+  background:transparent;
+  text-transform:capitalize;
+  font-size:0.8rem;
+  color:Black;
+  border-radius:0 !important;
+  border:0.1rem solid black !important ;
+}
+
+.btn-black:hover{
+  background:black !important;
+  color:white !important;
+}
+
+.cart-icon{
+  cursor:pointer;
+  font-size:1.2rem;
+  color:Red;
+}

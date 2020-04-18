@@ -9,22 +9,22 @@ export default class Product extends Component{
     render() {
         const {id,title,img,subCategories} = this.props.product; 
         return(
-            <ProductWrapper className='col mx-auto col-md-6 col-lg-3 p-3'>
-                <div className="card p-4">
+            <ProductWrapper className="col">
+                <div className="card p-2">
                     <ProductConsumer>
                         {value =>(
                             <div className="img-container" onClick={() => 
                                 value.handleCategory(id)
                             }>
                             <Link to="/detail" data={title}>
-                                <img src={img} alt="product" className="card-img-top"></img>
+                                <img src={img} alt="product" className="card-img-top rounded"></img>
                             </Link>
                         </div>
                         )
                         }                    
                     </ProductConsumer>
                     <div className="card-footer">
-                       <p className="font-weight-bold">{title}</p>
+                       <p className="text-center font-weight-bold">{title}</p>
                     </div>
                 </div>
             </ProductWrapper>
@@ -44,7 +44,7 @@ const ProductWrapper= styled.div`
 .card{
     border-color:transparent;
     transition:all 1s linear;
-    width:400px;
+    width:350px;
 }
 .card-footer{
     background:transparent;

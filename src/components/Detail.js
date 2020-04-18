@@ -8,8 +8,7 @@ import { ButtonContainer } from './button';
 export default class Detail extends Component{
   
     render(){
-        return(
-                
+        return(             
                 <ProductWrapper className="container-fluid">
                     <div className="back-btn">
                         <Link to="/">
@@ -28,10 +27,11 @@ export default class Detail extends Component{
                                                 <div className="img-container p-3">
                                                     <img src={i.image} alt="product" className="card-img-top"></img>
                                                 </div>         
-                                                <ButtonContainer
+                                                <ButtonContainer cart
                                                     disabled={i.inCart ? true : false}
                                                     onClick= {()=>{
                                                         value.addToCart(i.subid);
+                                                        value.openModal(i.subid);
                                                     }}>
                                                         AddToCart
                                                 </ButtonContainer>         
