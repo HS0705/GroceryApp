@@ -9,22 +9,22 @@ export default class Product extends Component{
     render() {
         const {id,title,img,subCategories} = this.props.product; 
         return(
-            <ProductWrapper className='col-9 mx-auto col-md-6 col-lg-3 my-3'>
-                <div className="card">
+            <ProductWrapper className='col mx-auto col-md-6 col-lg-3 p-3'>
+                <div className="card p-4">
                     <ProductConsumer>
                         {value =>(
-                            <div className="img-container p-4" onClick={() => 
-                                value.handleSubCategory(id)
+                            <div className="img-container" onClick={() => 
+                                value.handleCategory(id)
                             }>
-                            <Link to="/detail">
+                            <Link to="/detail" data={title}>
                                 <img src={img} alt="product" className="card-img-top"></img>
                             </Link>
                         </div>
                         )
                         }                    
                     </ProductConsumer>
-                    <div className="card-footer text-muted">
-                       <p>{title}</p>
+                    <div className="card-footer">
+                       <p className="font-weight-bold">{title}</p>
                     </div>
                 </div>
             </ProductWrapper>
@@ -44,6 +44,7 @@ const ProductWrapper= styled.div`
 .card{
     border-color:transparent;
     transition:all 1s linear;
+    width:400px;
 }
 .card-footer{
     background:transparent;
@@ -69,20 +70,5 @@ const ProductWrapper= styled.div`
 }
 .img-container:hover .card-img-top{
     transform:scale(1.2);
-}
-.cart-btn{
-    position:absolute;
-    bottom:0;
-    right:0;
-    padding:0.3rems 0.3rems;
-    border:none;
-    color:blue ;
-    font-size:1.4rem;
-    border-radius:0.5rem 0.5rem 0.5rem 0.5rem ;
-    transform:translate(100%, 100%);
-    transition:all 1s linear;
-}
-.img-container:hover .cart-btn{
-    transform: translate(0,0);
 }
 `;

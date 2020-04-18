@@ -9,29 +9,45 @@ export default class Detail extends Component{
   
     render(){
         return(
-                    <ProductConsumer>
-                        { value => {
-                            console.log(value.subProducts);
-                            const list = value.subProducts;
-                            return (
-                                 list.map((i, index) => (
-                                    <div key={index}>
-                                        <ProductWrapper className='col-10 mx-auto col-md-6 col-lg-3 my-3'>
-                                        <div className="card">
-                                            <div className="img-container p-4">
-                                                <img src={i.image} alt="product" className="card-img-top"></img>
-                                            </div>                         
-                                            <div className="card-footer text-muted">
-                                                <p>{i.info}</p>
-                                                <p>${i.price}</p>
+                
+                <ProductWrapper className="container-fluid">
+                    <div className="back-btn">
+                        <Link to="/">
+                            <ButtonContainer>Back to Products</ButtonContainer>
+                        </Link>
+                    </div>
+                    <div className="row">    
+                        <ProductConsumer>         
+                            { value => {
+                                const list = value.subProducts;
+                                return (
+                                    list.map((i, index) => (
+                                        <div className="col-md-4" key={index}>
+                                            <div className="card-columns p-5" >
+                                            <div className="card">
+                                                <div className="img-container p-3">
+                                                    <img src={i.image} alt="product" className="card-img-top"></img>
+                                                </div>         
+                                                <ButtonContainer
+                                                    disabled={i.inCart ? true : false}
+                                                    onClick= {()=>{
+                                                        value.addToCart(i.subid);
+                                                    }}>
+                                                        AddToCart
+                                                </ButtonContainer>         
+                                                <div className="card-footer p-4 d-flex justify-content-between">
+                                                    <p className="text-capitalize font-weight-bold ">{i.info}</p>
+                                                    <span className="text-capitalize font-weight-bold mr-1">${i.price}</span>
+                                                </div>
                                             </div>
+                                            </div> 
                                         </div>
-                                        </ProductWrapper>
-                                </div>
-                                ))
-                )     
-                                 }}
-                </ProductConsumer>
+                                            ))
+                                        )     
+                                    }}            
+                        </ProductConsumer>
+                    </div>
+                </ProductWrapper>
         );
     }
 }
@@ -41,12 +57,15 @@ Detail.propTypes = {
         subid:PropTypes.string,
         image:PropTypes.string,
         name:PropTypes.string,
+        info:PropTypes.string,
+        price:PropTypes.number,
     }).isRequired
 };
  const ProductWrapper= styled.div`
 .card{
     border-color:transparent;
     transition:all 1s linear;
+    width:350px;
 }
 .card-footer{
     background:transparent;
@@ -81,7 +100,7 @@ Detail.propTypes = {
     border:none;
     color:blue ;
     font-size:1.4rem;
-    border-radius:0.5rem 0.5rem 0.5rem 0.5rem ;
+    border-radius:0.5rem 0.5rem 0 0 ;
     transform:translate(100%, 100%);
     transition:all 1s linear;
 }

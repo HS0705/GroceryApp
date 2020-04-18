@@ -22,26 +22,47 @@ class ProductProvider extends Component{
         });
     };
     
-    getSubCategory = (id) =>{
+    getCategory = (id) =>{
         const product= this.state.products.find((item) => item.id === id).subCategories;
-         
+        //console.log(product);
         return product;
     }
-
-    handleSubCategory = (id) =>{
-        const product =this.getSubCategory(id);
+    getSubCategory = (subid) =>{
+        const product= this.state.subProducts.find((item) => item.subid === subid);
+        return product;
+    }
+    handleCategory = (id) =>{
+        const product =this.getCategory(id);
         
         this.setState(()=>{
-            return {subProducts: product}
+            return {subProducts: product};
         });
     }
-    addToCart= () =>{
-        console.log("Add to cart");
+    handlesubCategory = (subid) =>{
+        const product =this.getsubCategory(subid);
+        
+        this.setState(()=>{
+            return {subProducts: product};
+        });
     }
+    addToCart= (subid) =>{
+        let tempList=[...this.state.subProducts]
+        console.log(tempList);
+        const index=tempList.indexOf(this.getSubCategory(subid));
+        const product =tempList[index]
+        product.inCart= true;
+        product.count += 1;
+        console.log(product.count);
+        const price=product.price;
+        product.total=  price * product.count;
+    this.setState(()=>{
+        return {subProducts:tempList, cart: [this.state.cart, product]};
+    });
+}
     render() {
         return(
             <ProductContext.Provider value={{...this.state,
-            handleSubCategory: this.handleSubCategory,
+            handleCategory: this.handleCategory,
             addToCart:this.addToCart}}>
                 {this.props.children}
             </ProductContext.Provider>

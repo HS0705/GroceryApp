@@ -2,7 +2,7 @@ export const categories=[
     {
     id:"1abv",
     title:"Vegetables",
-    img:"image/vegetables.jpg",   
+    img:"image/vegetables1.jpg",   
     subCategories:[{
         subid:101,
         name: "Tomatoes",
@@ -46,7 +46,7 @@ export const categories=[
         {  
         subid:105,
         name: "Bell Peppers",
-        image:"image/bellpepers.jpg",
+        image:"image/bellpeppers.jpg",
         price:1.00,
         info:"Fresh BellPeppers",
         inCart:false,
@@ -87,7 +87,7 @@ export const categories=[
 {
     id:"2abf",
     title: "Fruits",
-    img:"image/fruits.jpg",
+    img:"image/fruits_2.jpg",
     subCategories:[{
         subid:201,
         name: "Watermelon",
@@ -141,7 +141,7 @@ export const categories=[
         {
         subid:206,
         name: "Blue berries",
-        image:"image/blueberries.jpg",
+        image:"image/blue berries.jpg",
         price:2.99,
         info:"Fresh Blue berries",
         inCart:false,
@@ -157,16 +157,26 @@ export const categories=[
         inCart:false,
         count:0,
         total:0
-        }]
+        },
+        {
+            subid:208,
+            name: "Kiwi",
+            image:"image/kiwi1.jpg",
+            price:1.99,
+            info:"Fresh Kiwis",
+            inCart:false,
+            count:0,
+            total:0
+            }]
 },
 {
     id:"3abb",
     title: "Bakery & Dairy",
-    img:"image/bakery.jpg",
+    img:"image/bakery5.jpg",
     subCategories:[{
         subid:301,
         name: "Bread",
-        image:"image/bread.jpg",
+        image:"image/bread1.jpg",
         price:3.99,
         info:"Fresh Bread",
         inCart:false,
