@@ -62,15 +62,16 @@ class ProductProvider extends Component{
     //Add the subitems to the shopping cart
     addToCart= (subid) =>{
         let tempList=[...this.state.subProducts]
-        console.log(tempList);
         const index=tempList.indexOf(this.getSubCategory(subid));
         const product =tempList[index]
         product.inCart= true;
-        product.count += 1;
+        product.count = 1;
         const price=product.price;
-        product.total=  price * product.count;
+        product.total=  price;
     this.setState(()=>{
         return { subProducts:tempList, cart: [...this.state.cart, product] };
+    }, ()=> {
+        this.addTotals();
     });
 }
 //Open the modal for the item selected
@@ -102,6 +103,19 @@ removeItem = (subid)=> {
 
 clearCart =() =>{
     console.log("Empty cart");
+}
+addTotals =()=>{
+    let subTotal = 0;
+    this.state.cart.map(item =>(subTotal += item.total));
+    subTotal=parseFloat(subTotal.toFixed(2));
+    const tempTax= subTotal * 0.1;
+    const tax = parseFloat(tempTax.toFixed(2));
+    let total= subTotal + tax;
+    total = parseFloat(total.toFixed(2));
+    this.setState(()=>{
+        return { cartSubTotal:subTotal, tax:tax, cartTotal:total }
+    })
+
 }
     render() {
         return(
