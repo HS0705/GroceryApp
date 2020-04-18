@@ -87,15 +87,37 @@ closeModal = () => {
         return{ modalOpen:false }
     })
 }
-//
+//Increase the quantity of the item added to the cart
 increaseQuantity = (subid) =>{
-    console.log("incremnt method");
+    let tempCart=[...this.state.cart];
+    const addedProduct= tempCart.find(item=> item.subid===subid);
+    const index = tempCart.indexOf(addedProduct);
+    const product = tempCart[index];
+    product.count = product.count + 1;
+    product.total =product.count * product.price;
+    this.setState(()=>{return {cart: [...tempCart]}},()=>{this.addTotals();})
 }
 
+//Decrease the quantity of the item added to the cart
 decreaseQuantity = (subid) =>{
-    console.log("decremnt method");
+    let tempCart=[...this.state.cart];
+    const addedProduct= tempCart.find(item=> item.subid===subid);
+    const index = tempCart.indexOf(addedProduct);
+    const product = tempCart[index];
+    product.count = product.count - 1;
+    if (product.count === 0){
+        this.removeItem(subid) 
+    }else{
+        product.total =product.count * product.price;
+        this.setState(()=>{
+            return { cart: [...tempCart] }
+        },()=>{
+            this.addTotals();}
+        )
+    }
 }
 
+//Remove a single item from the cart
 removeItem = (subid)=> {
     let tempProducts =[...this.state.subProducts];
     let tempCart = [...this.state.cart];
@@ -112,6 +134,7 @@ removeItem = (subid)=> {
     })
 }
 
+//Clear all the items from the cart and update the subproducts to depict the original state
 clearCart = () => {
     let tempSubProducts =[...this.state.subProducts];
     tempSubProducts.forEach(item => {
@@ -131,8 +154,8 @@ clearCart = () => {
 }
 addTotals =()=>{
     let subTotal = 0;
-    this.state.cart.map(item =>(subTotal += item.total));
     subTotal=parseFloat(subTotal.toFixed(2));
+    this.state.cart.map(item =>(subTotal += item.total));
     const tempTax= subTotal * 0.1;
     const tax = parseFloat(tempTax.toFixed(2));
     let total= subTotal + tax;
