@@ -11,22 +11,23 @@ import Detail from './components/Detail';
 import Modal from './components/Modal';
 import Cart from './components/Cart/';
 
-class App extends Component {
+
+export default class App extends Component {
+  
   render() {
-  return (
-    <React.Fragment>
-      <Navbar />
-      <Switch>
-        <Route exact path="/" component={ProductList} />
-        <Route path="/product" component={Product} />
-        <Route path="/detail" component={Detail} />
-        <Route path="/cart" component={Cart} />
-        <Route  component={Default} />
-      </Switch>
-      <Modal />
-    </React.Fragment>
-  );
+    return ( 
+      <React.Fragment>
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={ProductList} />
+          <Route path="/product" component={Product} />
+          <Route path="/detail" component={Detail} />
+          <Route path="/cart" component={Cart} />
+          <Route  component={Default} />
+        </Switch>
+        <Modal />
+      </React.Fragment>
+    );
 }
 }
 
-export default App;

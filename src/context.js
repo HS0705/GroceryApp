@@ -63,6 +63,7 @@ class ProductProvider extends Component{
         let tempList=[...this.state.subProducts]
         const index=tempList.indexOf(this.getSubCategory(subid));
         const product =tempList[index]
+        console.log("Item added",product);
         product.inCart= true;
         product.count = 1;
         const price=product.price;
@@ -93,6 +94,7 @@ increaseQuantity = (subid) =>{
     const addedProduct= tempCart.find(item=> item.subid===subid);
     const index = tempCart.indexOf(addedProduct);
     const product = tempCart[index];
+    console.log("Item Increased",product);
     product.count = product.count + 1;
     product.total =product.count * product.price;
     this.setState(()=>{return {cart: [...tempCart]}},()=>{this.addTotals();})
@@ -100,14 +102,25 @@ increaseQuantity = (subid) =>{
 
 //Decrease the quantity of the item added to the cart
 decreaseQuantity = (subid) =>{
+    let tempSubProducts =[...this.state.subProducts];
     let tempCart=[...this.state.cart];
     const addedProduct= tempCart.find(item=> item.subid===subid);
     const index = tempCart.indexOf(addedProduct);
     const product = tempCart[index];
+    console.log("Item decreased",product);
     product.count = product.count - 1;
     if (product.count === 0){
-        this.removeItem(subid) 
-    }else{
+        tempCart =tempCart.filter(item => item.subid !== subid);
+        const removeindex =tempSubProducts.indexOf(this.getSubCategory(subid));
+        product.inCart = false ;
+        product.count = 0;
+        product.total = 0 ;
+        this.setState(()=>{
+            return{ cart: [...tempCart],subProducts: [...tempSubProducts]}
+        },()=>{
+        this.addTotals(); 
+    })
+}else{
         product.total =product.count * product.price;
         this.setState(()=>{
             return { cart: [...tempCart] }
@@ -116,7 +129,6 @@ decreaseQuantity = (subid) =>{
         )
     }
 }
-
 //Remove a single item from the cart
 removeItem = (subid)=> {
     let tempProducts =[...this.state.subProducts];
@@ -124,6 +136,7 @@ removeItem = (subid)=> {
     tempCart =tempCart.filter(item => item.subid !== subid);
     const index =tempProducts.indexOf(this.getSubCategory(subid));
     let removedProduct = tempProducts[index];
+    console.log("Item Removed",removedProduct);
     removedProduct.inCart = false ;
     removedProduct.count = 0;
     removedProduct.total = 0 ;

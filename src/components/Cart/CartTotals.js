@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Checkout from './Checkout';
 
-export default function CartTotals({value}) {
-    const {cartSubTotal,tax,cartTotal,clearCart}=value
+export default function CartTotals({value, history}) {
+    const {cartSubTotal,tax,cartTotal,clearCart}=value;
+ 
     return(
     <React.Fragment>
         <div className="container">
@@ -10,7 +12,7 @@ export default function CartTotals({value}) {
                 <div className="col-10  mt-2 ml-sm-5 ml-md-auto col-sm-8 text-capitalize text-right">
                     <Link to="/">
                         <button className="btn btn-danger text-uppercase mb-3 px-5" type="button" onClick={()=> {clearCart()}}>
-                            ClearCart
+                            Clear Cart
                         </button>
                     </Link>
                     <h5>
@@ -31,6 +33,11 @@ export default function CartTotals({value}) {
                         </span>
                         <strong> $ {cartTotal}</strong>
                     </h5>
+                    <Checkout />
+                    <br/>
+                    <a href="https://stripe.com/" target="_blank">
+                        <img src="image/stripe.png" className="img-fluid" />
+                    </a>
                 </div>
             </div>
         </div>
