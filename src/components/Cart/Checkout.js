@@ -1,23 +1,21 @@
 import React, {Component} from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 
-export default class Checkout extends Component{
-
+export default class Checkout extends Component {
+  
     onToken = (token,addresses) => {
-    // const url="https://api.stripe.com/v1/";
-    // fetch(url, {
-    //   method: "POST",
-    }
-      // .then(res => {
-      //   console.log("response received");
-      //   return res.json();
-      // })
-      // .then(result => {
-      //   console.log(result);
-      // })
-      // .catch(error => {
-      //   console.log("error");
-      // });
+      const url="https://api.stripe.com/v1/"
+      fetch(url,{
+        method:'POST',
+      }).then((data)=> {  
+        console.log('Request success: ', data);  
+        this.props.clearCart();
+        this.props.history.push('/');
+      })  
+      .catch((error)=> {  
+        console.log('Request failure: ', error);  
+      })
+  }
   render() {
     return (
       <StripeCheckout

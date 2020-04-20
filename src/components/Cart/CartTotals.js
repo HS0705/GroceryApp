@@ -33,7 +33,7 @@ export default function CartTotals({value, history}) {
                         </span>
                         <strong> $ {cartTotal}</strong>
                     </h5>
-                    <Checkout />
+                    <Checkout  total={cartTotal} clearCart={clearCart} history={history}/>
                     <br/>
                     <a href="https://stripe.com/" target="_blank">
                         <img src="image/stripe.png" className="img-fluid" />

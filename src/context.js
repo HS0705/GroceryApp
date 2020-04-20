@@ -168,11 +168,10 @@ clearCart = () => {
 addTotals =()=>{
     let subTotal = 0;
     this.state.cart.map(item =>(subTotal += item.total));
-    subTotal=Number.parseFloat(subTotal).toFixed(2);
     const tempTax= subTotal * 0.1;
-    const tax = Number.parseFloat(tempTax).toFixed(2);;
+    const tax = parseFloat(tempTax.toFixed(2));
     let total= subTotal + tax;
-    total = Number.parseFloat(total).toFixed(2);;
+    total = parseFloat(total.toFixed(2));
     this.setState(()=>{
         return { cartSubTotal:subTotal, tax:tax, cartTotal:total }
     })
