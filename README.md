@@ -1,9 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## `Table of Contents`
-*[About The Project](#about-the-project)
-*[Setup](#setup)
-
 
 ## `About The Project`
 
