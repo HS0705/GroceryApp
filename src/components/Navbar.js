@@ -1,6 +1,6 @@
 import React, {Component}  from 'react';
 import {Link} from 'react-router-dom';
-import logo from '../logo.png';
+import logo from '../logo2.png';
 import styled from 'styled-components';
 import {ButtonContainer} from './button';
 export default class Navbar extends Component{
